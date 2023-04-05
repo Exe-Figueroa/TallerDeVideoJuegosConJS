@@ -94,9 +94,9 @@ function startGame() {
 }
 function setCanvasSize() {
     if (window.innerHeight > window.innerWidth) {
-        canvaSize = window.innerWidth * 0.80;
+        canvaSize = (window.innerWidth * 0.80).toFixed(2);
     } else {
-        canvaSize = window.innerHeight * 0.80;
+        canvaSize = (window.innerHeight * 0.80).toFixed(2);
     }
     canvas.setAttribute('width', canvaSize);
     canvas.setAttribute('height', canvaSize);
@@ -111,8 +111,8 @@ function movePlayer() {
         levelWin()
     }
     const enemyCollision = enemies.find(enemy => {
-        const enemyCollisionX = enemy.x.toFixed(2) == playerPosition.x.toFixed(2);
-        const enemyCollisionY = enemy.y.toFixed(2) == playerPosition.y.toFixed(2);
+        const enemyCollisionX = enemy.x == playerPosition.x;
+        const enemyCollisionY = enemy.y == playerPosition.y;
         return enemyCollisionX && enemyCollisionY;
     })
     if (enemyCollision){

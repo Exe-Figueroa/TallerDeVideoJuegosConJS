@@ -23,6 +23,7 @@ canvas {
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
+    align-items: center;
     width: 100%;
 }
 button {
@@ -53,8 +54,8 @@ p {
     button {
         margin-top: 25px;
     }
-    #up,
-    #down {
+    #btn-up,
+    #btn-down {
         margin-left: 100%;
         margin-right: 100%;
     }
