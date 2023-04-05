@@ -6,6 +6,9 @@ const btnRight = document.querySelector('#btn-right');
 const btnDown = document.querySelector('#btn-down');
 const spanLives = document.querySelector('#lives');
 const spantime = document.querySelector('#time');
+const spanRecord = document.querySelector('#record');
+const pResult = document.querySelector('#resultado');
+const pResult2 = document.querySelector('#resultadoAlternativo');
 
 
 let canvaSize;
@@ -42,6 +45,7 @@ function startGame() {
     if(!timeStart){
         timeStart = Date.now();
         timeInterval = setInterval(showTime, 75)
+        showRecord();
     }
     const mapRows = map.trim().split('\n');
     const mapCol = mapRows.map(row => row.trim().split(''));
@@ -120,7 +124,22 @@ function movePlayer() {
 }
 function gameWin() {
     clearInterval(timeInterval)
-    console.log('ganaste');
+
+    const recordTime =  localStorage.getItem('recordTime')
+    console.log(recordTime);
+    const playerTime = Date.now() - timeStart;
+    if (recordTime) {
+        if(recordTime >= playerTime){ 
+            localStorage.setItem('recordTime', playerTime)
+            pResult.innerHTML = 'Felicidades!! Has superado el anterior record'
+        }else{
+            pResult.innerHTML = 'Que pena. Vuelve a intentarlo.'
+        }
+    }else{
+        localStorage.setItem('recordTime', playerTime )
+        pResult.innerHTML = 'Primera vez? Muy bien pero ahora trata de superar tu record '
+    }
+    pResult2.innerHTML = `Ganaste!! Este es tu record: "${playerTime}"`
 }
 function showLives(){
     const heartArray = Array(lives).fill(emojis['HEART'])
@@ -131,6 +150,9 @@ function showTime() {
 
     spantime.innerHTML = `${Date.now()-timeStart}`;
 
+}
+function showRecord(){
+    spanRecord.innerHTML = localStorage.getItem('recordTime');
 }
 function levelWin() {
     
