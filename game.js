@@ -92,15 +92,22 @@ function startGame() {
      * ?console.log(posicionAnterior); 
      * */
 }
+function fixNumber(n){
+    return Number(n.toFixed(2))
+}
 function setCanvasSize() {
     if (window.innerHeight > window.innerWidth) {
-        canvaSize = (window.innerWidth * 0.80).toFixed(2);
+        canvaSize = (window.innerWidth * 0.70);
     } else {
-        canvaSize = (window.innerHeight * 0.80).toFixed(2);
+        canvaSize = (window.innerHeight * 0.70);
     }
+
+    canvaSize = Number(canvaSize.toFixed(2))
     canvas.setAttribute('width', canvaSize);
     canvas.setAttribute('height', canvaSize);
     elementsSize = canvaSize/10
+    playerPosition.x = undefined;
+    playerPosition.y  = undefined;
     startGame()
 }
 function movePlayer() {
@@ -111,8 +118,8 @@ function movePlayer() {
         levelWin()
     }
     const enemyCollision = enemies.find(enemy => {
-        const enemyCollisionX = enemy.x == playerPosition.x;
-        const enemyCollisionY = enemy.y == playerPosition.y;
+        const enemyCollisionX = enemy.x.toFixed(2) == playerPosition.x.toFixed(2);
+        const enemyCollisionY = enemy.y.toFixed(2) == playerPosition.y.toFixed(2);
         return enemyCollisionX && enemyCollisionY;
     })
     if (enemyCollision){
